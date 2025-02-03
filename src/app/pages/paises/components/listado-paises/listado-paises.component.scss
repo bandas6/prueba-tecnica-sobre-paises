@@ -1,0 +1,9 @@
+.formulario{
+    max-height: 80vh; 
+    overflow-y: auto;
+    ion-chip {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}

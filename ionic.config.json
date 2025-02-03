@@ -1,0 +1,7 @@
+{
+  "name": "CStad",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

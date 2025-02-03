@@ -1,0 +1,10 @@
+<ion-toolbar mode="md">
+  <ion-segment [value]="pais" class="scrollable-segment" [swipeGesture]="true" [scrollable]="true"
+    (ionChange)="segmentChanged($event)">
+    @for (item of regionesDisponibles; track $index) {
+    <ion-segment-button value="{{item.valor}}">
+      <ion-label>{{item.nombre}}</ion-label>
+    </ion-segment-button>
+    }
+  </ion-segment>
+</ion-toolbar>

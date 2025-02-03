@@ -1,0 +1,22 @@
+<ion-grid class="container-fluid formulario">
+  <form [formGroup]="formPaises">
+    <ion-row class="paises_listado">
+      <ion-col size="12" formArrayName="paises">
+        <ion-chip mode="ios" (click)="verDetalles(pais)"
+          *ngFor="let pais of listarPaises.controls; let indexPais = index" 
+          [formGroupName]="indexPais">
+          
+          <ion-label>{{pais.value.nombre}}</ion-label>
+          
+          
+          <!-- Checkbox para controlar el estado -->
+          <ion-checkbox formControlName="check" ></ion-checkbox>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <!--
+    <pre>{{ formPaises.value | json }}</pre>
+    -->
+</ion-grid>

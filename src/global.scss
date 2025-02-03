@@ -1,0 +1,82 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+
+:root {
+
+    // colores de la app
+
+    --color_uno: #007BFF;
+    --color_dos: #FFFFFF;
+    --color_tres: #343A40;
+    --color_cuatro: #28A745;
+
+    // tipografía y color textos
+
+    --color_texto_claro: #ffffff;
+    --color_texto_oscuros: #000000;
+
+}
+
+
+/*** Fuentes ***/
+@font-face {
+    font-family: "Ubuntu";
+    src: url("assets/fonts/Ubuntu/Ubuntu-Bold.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("assets/fonts/Ubuntu/Ubuntu-Medium.ttf");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("assets/fonts/Ubuntu/Ubuntu-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+ion-content {
+    --overflow: scroll;
+    /* Fuerza que el contenido siempre sea desplazable */
+}
