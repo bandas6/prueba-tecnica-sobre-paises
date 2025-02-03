@@ -1,0 +1,29 @@
+<ion-grid>
+
+  <ion-row *ngFor="let u of usuario">
+    <ion-card>
+
+      <img class="pefilImg" alt="Silhouette of mountains" [src]="u.avatar.ruta" />
+      <ion-card-header>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card-title>{{u.nombre}}</ion-card-title>
+            <ion-card-subtitle>Nombre del usuario</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col class="contenedor-chit" size="12">
+            <ion-chip *ngFor="let g of u.generos" [style.background-color]="g.color_principal || g.color_secundario">
+              <ion-label>{{g.nombre}}</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+
+</ion-grid>

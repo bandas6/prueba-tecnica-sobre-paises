@@ -22,5 +22,9 @@ export class CountriesService {
   obtenerPaisesPorRegion(region: string){
     return this.http.get(`${this.url}/region/${region}`);
   }
+
+  obtenerPaisPorNombre(nombre: string){
+    return this.http.get(`${this.url}/name/${nombre}`);
+  }
   
 }

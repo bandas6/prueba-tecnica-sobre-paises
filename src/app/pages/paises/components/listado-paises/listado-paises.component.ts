@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { CountriesService } from 'src/app/services/countries/countries.service';
 
 @Component({
   selector: 'app-listado-paises',
@@ -12,6 +14,9 @@ import { IonicModule } from '@ionic/angular';
 export class ListadoPaisesComponent implements OnInit, OnChanges {
 
   formBuilder = inject(FormBuilder);
+  countriesService = inject(CountriesService);
+
+  router = inject(Router);
 
   @Input() paises: any[] = [];
  
@@ -19,8 +24,6 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
 
   lastClickTime: number = 0;
   doubleClickDelay: number = 300;  // Tiempo en milisegundos para considerar un doble clic
-
-
 
   constructor() { }
 
@@ -83,7 +86,11 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
 
   onChipDoubleClick(pais: any): void {
     // Lógica que deseas ejecutar cuando se detecta un doble clic en el chip
-    console.log('Doble clic detectado en el chip del país:', pais);
+    console.log('Doble clic detectado en el chip del país:', pais.value);
+
+    this.router.navigate([`/pages/detalles/${pais.value.nombre}`])
+
+  
 
   }
 
