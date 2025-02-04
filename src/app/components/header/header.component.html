@@ -1,6 +1,8 @@
 <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-button *ngIf="false"> Start </ion-button>
+    <ion-button *ngIf="regresar" [routerLink]="rutaRegresar"> 
+      <ion-icon slot="start" name="caret-back-outline"></ion-icon>  
+    </ion-button>
   </ion-buttons>
   <ion-title>{{tituloHeader}}</ion-title>
   <ion-buttons *ngIf="false" slot="end">

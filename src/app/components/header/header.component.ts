@@ -9,6 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() tituloHeader: string = '';
+  @Input() rutaRegresar: string = '';
+  @Input() regresar: boolean = false;
 
   constructor() { }
 

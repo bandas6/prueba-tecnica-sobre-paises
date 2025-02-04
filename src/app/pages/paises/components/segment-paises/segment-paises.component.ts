@@ -38,13 +38,15 @@ export class SegmentPaisesComponent implements OnInit {
   }
 
   obtenerPaisPorRegion() {
+
     this.countriesService.obtenerPaisesPorRegion(this.pais).subscribe({
       next: (data: any) => {
 
         this.regionEncontradaSegunSuPais = data.map((data: any) => {
           return {
             nombre: data.name.common,
-            bandera: data.flags.svg
+            bandera: data.flags.svg,
+            poblacion: data.population
           }
         });
 
@@ -54,6 +56,7 @@ export class SegmentPaisesComponent implements OnInit {
         console.error('Error al obtener los países por región', error);
       }
     });
+
   }
 
 }

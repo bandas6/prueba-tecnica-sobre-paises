@@ -80,3 +80,10 @@ ion-content {
     --overflow: scroll;
     /* Fuerza que el contenido siempre sea desplazable */
 }
+
+.boton_principal {
+    background: var(--color_uno);
+    padding: 0.3rem 0.5rem;
+    border-radius: 1rem;
+    color: white;
+}

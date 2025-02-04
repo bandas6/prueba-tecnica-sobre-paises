@@ -1,6 +1,10 @@
 .formulario{
-    max-height: 80vh; 
-    overflow-y: auto;
+ 
+    form{
+        max-height: 74vh; 
+        overflow-y: auto;
+    }
+
     ion-chip {
         width: 100%;
         display: flex;
@@ -12,6 +16,12 @@
         gap: 8px;
         img {
             width: 2rem;
+        }
+    }
+    .contenedor_boton{
+        display: flex;
+        .boton_principal{
+            margin: auto;
         }
     }
 }

@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CountriesService } from 'src/app/services/countries/countries.service';
+import { ComparacionesComponent } from '../../comparaciones/comparaciones.component';
 
 @Component({
   selector: 'app-listado-paises',
@@ -17,9 +18,10 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
   countriesService = inject(CountriesService);
 
   router = inject(Router);
+  modalController = inject(ModalController);
 
   @Input() paises: any[] = [];
- 
+
   formPaises!: FormGroup;
 
   lastClickTime: number = 0;
@@ -54,22 +56,26 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
   }
 
   guardarPaises(pais: any = null) {
-    console.log(pais);
     this.listarPaises.push(this.nuevoPais(pais))
   }
 
   nuevoPais(pais: any = null) {
 
+    console.log(pais)
+
     let nombre = null;
     let bandera = null;
+    let poblacion = null;
 
     if (pais) {
       if (pais.nombre) nombre = pais.nombre;
       if (pais.bandera) bandera = pais.bandera;
+      if (pais.poblacion) poblacion = pais.poblacion;
     }
 
     return this.formBuilder.group({
       nombre: [nombre, []],
+      poblacion: [poblacion, []],
       svg: [bandera, []],
       check: [false]
     })
@@ -79,18 +85,40 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
   verDetalles(pais: any = null) {
     const currentTime = new Date().getTime();
     if (currentTime - this.lastClickTime < this.doubleClickDelay) {
-      this.onChipDoubleClick(pais);  // Si es un doble clic, ejecutar la lógica
+      this.onChipDoubleClick(pais);
     }
     this.lastClickTime = currentTime;
   }
 
   onChipDoubleClick(pais: any): void {
-    // Lógica que deseas ejecutar cuando se detecta un doble clic en el chip
-    console.log('Doble clic detectado en el chip del país:', pais.value);
-
     this.router.navigate([`/pages/detalles/${pais.value.nombre}`])
+  }
 
-  
+  async compararPoblaciones() {
+    let paises: any[] = [];
+
+    for (let index = 0; index < this.listarPaises.controls.length; index++) {
+      /* console.log(this.listadoGenerosLibros.controls[index].value); */
+      const pais = this.listarPaises.controls[index].value;
+      /* console.log('----->', libros.check); */
+      if (pais.check) {
+        paises.push(pais);
+      }
+    }
+    
+    if(paises.length > 0) {
+
+      const modal = await this.modalController.create({
+        component: ComparacionesComponent,
+        cssClass: 'modals',
+        componentProps: { 'paises': paises }
+      });
+      await modal.present();
+      
+      //const { data } = await modal.onDidDismiss();
+    
+    }
+
 
   }
 

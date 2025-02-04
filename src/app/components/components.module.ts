@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { PrecentacionComponent } from './precentacion/precentacion.component';
@@ -11,7 +12,8 @@ import { PrecentacionComponent } from './precentacion/precentacion.component';
   exports: [HeaderComponent, PrecentacionComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterLink
   ]
 })
 export class ComponentsModule { }
