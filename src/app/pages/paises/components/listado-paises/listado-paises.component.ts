@@ -42,7 +42,9 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+   
+  }
 
 
   contruirFormulario() {
@@ -60,22 +62,22 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
   }
 
   nuevoPais(pais: any = null) {
-
-    console.log(pais)
-
     let nombre = null;
     let bandera = null;
     let poblacion = null;
+    let region = null;
 
     if (pais) {
       if (pais.nombre) nombre = pais.nombre;
       if (pais.bandera) bandera = pais.bandera;
       if (pais.poblacion) poblacion = pais.poblacion;
+      if (pais.region) region = pais.region;
     }
 
     return this.formBuilder.group({
       nombre: [nombre, []],
       poblacion: [poblacion, []],
+      region: [region, []],
       svg: [bandera, []],
       check: [false]
     })
@@ -91,7 +93,10 @@ export class ListadoPaisesComponent implements OnInit, OnChanges {
   }
 
   onChipDoubleClick(pais: any): void {
-    this.router.navigate([`/pages/detalles/${pais.value.nombre}`])
+    console.log(pais.value)
+    this.router.navigate(['pages/detalles'], { 
+      queryParams: { pais: pais.value.nombre, region: pais.value.region } 
+    });
   }
 
   async compararPoblaciones() {

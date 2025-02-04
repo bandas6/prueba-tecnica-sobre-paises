@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CountriesService } from 'src/app/services/countries/countries.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-segment-paises',
@@ -11,10 +12,11 @@ import { CountriesService } from 'src/app/services/countries/countries.service';
 export class SegmentPaisesComponent implements OnInit {
 
   private countriesService = inject(CountriesService)
+  private storageService = inject(StorageService)
 
   @Output() paises: EventEmitter<any> = new EventEmitter;
 
-  pais: any = 'americas';
+  region: any = 'americas';
 
   regionesDisponibles: any[] = [
     { nombre: 'Americas', valor: 'americas' },
@@ -33,29 +35,48 @@ export class SegmentPaisesComponent implements OnInit {
   }
 
   segmentChanged(event: any) {
-    this.pais = event.detail.value;
+    this.region = event.detail.value;
     this.obtenerPaisPorRegion();
   }
 
-  obtenerPaisPorRegion() {
+  async obtenerPaisPorRegion() {
 
-    this.countriesService.obtenerPaisesPorRegion(this.pais).subscribe({
-      next: (data: any) => {
-
-        this.regionEncontradaSegunSuPais = data.map((data: any) => {
-          return {
-            nombre: data.name.common,
-            bandera: data.flags.svg,
-            poblacion: data.population
-          }
-        });
-
-        this.paises.emit(this.regionEncontradaSegunSuPais);
-      },
-      error: (error) => {
-        console.error('Error al obtener los países por región', error);
-      }
+    // Obtiene la lista de países almacenados en el storage
+    const paisEnLocalStorage = await this.storageService.get(this.region).then((storage) => {
+      return storage;
     });
+
+    if (!paisEnLocalStorage) {
+      this.countriesService.obtenerPaisesPorRegion(this.region).subscribe({
+        next: (data: any) => {
+
+          this.regionEncontradaSegunSuPais = data.map((data: any) => {
+            return {
+              nombre: data.name?.common || null,
+              bandera: data.flags?.svg || null,
+              poblacion: data.population || null,
+              region: data.region || null,
+              nombreOficial: data.name?.official || null,
+              capital: Array.isArray(data.capital) && data.capital.length > 0 ? data.capital[0] : null,
+              idiomas: data.languages || null,
+              moneda: data.currencies || null,
+            };
+          });
+          
+
+          // Almacena la lista de países en el storage
+          this.storageService.set(this.region, this.regionEncontradaSegunSuPais);
+
+          this.paises.emit(this.regionEncontradaSegunSuPais);
+        },
+        error: (error) => {
+          console.error('Error al obtener los países por región', error);
+        }
+      });
+    } else {
+      this.regionEncontradaSegunSuPais = paisEnLocalStorage;
+      this.paises.emit(this.regionEncontradaSegunSuPais);
+    }
 
   }
 
