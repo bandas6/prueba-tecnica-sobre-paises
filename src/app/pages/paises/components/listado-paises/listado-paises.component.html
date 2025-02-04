@@ -1,10 +1,10 @@
 <ion-grid class="formulario">
   <ion-row>
     
-    <ion-col size="12">
+    <ion-col class="contenedor" size="12">
       <form [formGroup]="formPaises">
         <ion-row class="paises_listado">
-          <ion-col size="12" formArrayName="paises">
+          <ion-col size="12" formArrayName="paises" class="contenedor">
             <ion-chip mode="ios" (click)="verDetalles(pais)"
               *ngFor="let pais of listarPaises.controls; let indexPais = index" [formGroupName]="indexPais">
   

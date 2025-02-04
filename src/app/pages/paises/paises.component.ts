@@ -10,17 +10,33 @@ import { SegmentPaisesComponent } from "./components/segment-paises/segment-pais
   styleUrls: ['./paises.component.scss'],
   imports: [ComponentsModule, SegmentPaisesComponent, IonicModule, ListadoPaisesComponent],
 })
-export class PaisesComponent  implements OnInit {
+export class PaisesComponent implements OnInit {
 
-  paises:any[] = [];
+  paises: any[] = [];
+  paisesSinModificar: any[] = [];
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 
-  paisesEncontrados(paises:any){
+  paisesEncontrados(paises: any) {
     this.paises = paises;
+    this.paisesSinModificar = paises;
+  }
+
+  buscarPais(pais: any) {
+    this.paises = this.buscarPaises(pais.detail.value);
+  }
+
+  buscarPaises(busqueda: string) {
+    if (busqueda === '') {
+      return this.paisesSinModificar;
+    }
+    return this.paises.filter((pais: any) => {
+      return pais.nombre.toLowerCase().includes(busqueda.toLowerCase())
+    }
+    );
   }
 
 }

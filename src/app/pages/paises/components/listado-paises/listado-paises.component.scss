@@ -1,26 +1,37 @@
-.formulario{
- 
-    form{
-        max-height: 74vh; 
-        overflow-y: auto;
+.formulario {
+    .contenedor {
+        height: 64vh;
+        padding: 0;
+        margin-bottom: 0.6rem;
+
+        form {
+            max-height: 100%;
+            overflow-y: auto;
+        }
     }
 
     ion-chip {
-        width: 100%;
+        width: 94%;
         display: flex;
         justify-content: space-between;
+        margin-right: auto;
+        margin-left: auto;
     }
-    .nombreYImg{
+
+    .nombreYImg {
         display: flex;
         align-items: center;
         gap: 8px;
+
         img {
             width: 2rem;
         }
     }
-    .contenedor_boton{
+
+    .contenedor_boton {
         display: flex;
-        .boton_principal{
+
+        .boton_principal {
             margin: auto;
         }
     }
